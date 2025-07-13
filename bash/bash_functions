@@ -1,0 +1,62 @@
+#!/bin/bash
+# NICUP14's custom bash function definitions
+
+# Searches for a matching entry in the archlinux wiki
+function archwiki() {
+	local file
+	file=$(find /usr/share/doc/arch-wiki/html -name '*.html' | fzf) && qutebrowser "$file"
+}
+
+# Prints information regarding a given battery
+function bstat() {
+	upower -i $(upower -e $@) | bat
+}
+
+# Backup files specified by BKPATH variable
+export BKPATH="/home/nikut"
+function backup()
+{
+	tar -hcvzf "$HOME/backups/$(uname -o)_$(date +%R-%d-%m-%y).tar.gz" -C "$HOME" "$(echo $BKPATH | tr ':' ' ')"
+}
+
+# Create a standard cpp project
+function mkcpp() 
+{
+	local PROJECT
+	for PROJECT in "$@"
+	do
+		mkdir -p "$PROJECT"
+		mkdir -p "$PROJECT"/src
+		
+		# main.cpp generator
+		[ -f "$PROJECT"/src/main.cpp ] && mv "$PROJECT"/src/main.cpp "$PROJECT"/src/main.cpp.bak
+		echo -ne '#include <iostream>\n\nint main()\n{\n\treturn 0;\n}' > "$PROJECT"/src/main.cpp
+
+		# makefile generator
+		[ -f "$PROJECT"/makefile ] && mv "$PROJECT"/makefile "$PROJECT"/makefile.bak
+		echo -ne '# Project structure\nBUILD_DIR ?= bin\nSOURCE_DIR ?= src\n\n# Project parameters\nPROJECT = main\nSOURCES = $(wildcard $(SOURCE_DIR)/*.cpp)\nOBJECTS = $(patsubst $(SOURCE_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SOURCES))\n\n# Compiler parameters\nCXX = g++\nCXXFLAGS ?=\nCXXFLAGS += -g -Wall -Werror\n\ndefault: clean $(PROJECT)\n\n$(PROJECT) : $(OBJECTS)\n\t$(CXX) $^ -o $(BUILD_DIR)/$@\n\n$(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp\n\t@mkdir -p $(BUILD_DIR)\n\t$(CXX) -c $(CXXFLAGS) $< -o $@\n\nclean:\n\t@rm -vrf $(BUILD_DIR)' > "$PROJECT"/makefile
+	done
+}
+
+# Runs "make clean" recursively
+function mkrclean()
+{
+	# clean projects that contain makefiles
+	find "$@" -type d -exec make -C '{}' clean \;
+}
+
+# Choses a random line from a file
+function rline()
+{
+	# Declarations
+	local FILE
+	local LINE_COUNT
+	local LINE_RNUM
+
+	# Definitions
+	FILE=$*
+	LINE_COUNT=$(wc -l "$FILE" | cut -d ' ' -f 1)
+	LINE_RNUM=$((RANDOM % LINE_COUNT))
+
+	sed -e "${LINE_RNUM}p" "$FILE"
+}

@@ -1,0 +1,23 @@
+# Structure-related variables
+FORMAT = pdf
+BUILD_DIR ?= bin
+SOURCE_DIR ?= src
+SOURCES = $(wildcard $(SOURCE_DIR)/*.gv)
+OUT_FILES = $(patsubst $(SOURCE_DIR)/%.gv, $(BUILD_DIR)/%.$(FORMAT), $(SOURCES))
+
+# Graphviz-related variables
+GV = dot
+GVFLAGS ?=
+GVFLAGS += -T$(FORMAT)
+
+# Alias definitions
+def: default
+cdef: clean default
+default: $(OUT_FILES)
+clean:
+	@rm -vrf $(BUILD_DIR)
+
+# Default compiling rules
+$(BUILD_DIR)/%.$(FORMAT): %.gv
+	@mkdir -p $(BUILD_DIR)
+	$(GV) $(GVFLAGS) $< -o $@

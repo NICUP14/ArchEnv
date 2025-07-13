@@ -1,0 +1,17 @@
+
+# Starts the notification daemon
+xfce4-notifyd & 
+
+# Starts the power manager daemon
+xfce4-power-manager &
+
+# Starts the compositor (transparency)
+picom &
+
+# Starts dwmblocks (status bar)
+dwmblocks &
+
+# Sets up background image
+feh --bg-scale ~/Images/dedsec.jpg &
+
+exec dwm
