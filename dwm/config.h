@@ -60,17 +60,19 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_red, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *iwgtkcd[]  = { "iwgtk", NULL };
-static const char *firefoxcd[]  = { "firefox", NULL };
-static const char *qutebrowsercd[]  = { "qutebrowser", NULL };
+static const char *vscodecmd[] = { "code", NULL };
+static const char *iwgtkcmd[]  = { "iwgtk", NULL };
+static const char *firefoxcmd[]  = { "firefox", NULL };
+static const char *qutebrowsercmd[]  = { "qutebrowser", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_grave,  spawn,          {.v = termcmd } },
-	{ ALTKEY,                       XK_e,      spawn,          {.v = iwgtkcd } },
-	{ ALTKEY,                       XK_f,      spawn,          {.v = firefoxcd } },
-	{ ALTKEY,                       XK_c,      spawn,          {.v = qutebrowsercd } },
+	{ ALTKEY,                       XK_v,      spawn,          {.v = vscodecmd } },
+	{ ALTKEY,                       XK_e,      spawn,          {.v = iwgtkcmd } },
+	{ ALTKEY,                       XK_f,      spawn,          {.v = firefoxcmd } },
+	{ ALTKEY,                       XK_c,      spawn,          {.v = qutebrowsercmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_d,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_a,      focusstack,     {.i = -1 } },

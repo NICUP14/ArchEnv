@@ -14,6 +14,7 @@ Patches:
 * clipboard
 * scrollback
 * keyboard select
+* glyph wide support
 
 ## Shortcuts
 
