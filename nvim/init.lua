@@ -1,7 +1,7 @@
 -- NICUP14's NeoVim configuration file
 
 -- Leader key (set early)
-vim.g.mapleader = " "
+vim.g.mapleader = "`"
 
 -- Basic Vim options
 local opt = vim.opt
@@ -49,6 +49,10 @@ require("plugin.lualine")
 require("plugin.lint")
 require("plugin.semshi")
 
--- Keymap for splitting lines into sentences (like your 'Q' mapping)
+-- Keymaps
 vim.keymap.set('n', 'Q', 'gqq', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-Down>', 'gj', { noremap = true, silent = true })
+vim.keymap.set('x', '<S-Down>', 'gj', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-Up>', 'gk', { noremap = true, silent = true })
+vim.keymap.set('x', '<S-Up>', 'gk', { noremap = true, silent = true })
 

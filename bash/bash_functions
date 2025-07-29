@@ -1,15 +1,39 @@
 #!/bin/bash
 # NICUP14's custom bash function definitions
 
+# Saves output to clipboard
+function c() {
+	"$@" | xclip -selection clipboard
+}
+
+# Select from output with vim then save to clipboard
+function cv() {
+	"$@" | vim -c 'autocmd VimLeavePre * execute "%!xclip -selection clipboard"' \
+	           -c 'set buftype=nowrite' \
+	           -c 'startinsert' -
+}
+
+# Searches for a local matching pdf entry in ~/Documents/Wiki
+function w() {
+	local file
+	file=$(find ~/Documents/Wiki -name '*.pdf' | fzf) && zathura "$file"
+}
+
+# Searches for a local matching text entry in ~/Documents/Wiki
+function wt() {
+	local file
+	file=$(find ~/Documents/Wiki -type f | fzf) && bat "$file"
+}
+
 # Searches for a matching entry in the archlinux wiki
-function archwiki() {
+function aw() {
 	local file
 	file=$(find /usr/share/doc/arch-wiki/html -name '*.html' | fzf) && qutebrowser "$file"
 }
 
 # Prints information regarding a given battery
 function bstat() {
-	upower -i $(upower -e $@) | bat
+	upower -i $(upower -e | grep $@) | bat
 }
 
 # Backup files specified by BKPATH variable

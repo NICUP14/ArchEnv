@@ -10,9 +10,6 @@ eval "$(zoxide init bash)"
 # Configures 'thefuck'
 eval "$(thefuck --alias)"
 
-# Adds the user's bin directory to PATH
-export PATH="~/.local/bin:$PATH"
-
 # Sources the user-defined aliases
 export BASH_ALIASES_FILE="$HOME/.bash_aliases"
 [ -f "$BASH_ALIASES_FILE" ] && source "$BASH_ALIASES_FILE"

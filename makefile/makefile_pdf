@@ -1,0 +1,22 @@
+# Parameters
+PANDOC_FLAGS ?=
+BUILD_DIR := thesis
+
+polished: $(BUILD_DIR)/ThesisPolished.pdf
+normal: $(BUILD_DIR)/Thesis.pdf
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+$(BUILD_DIR)/%.tex: %.md | $(BUILD_DIR)
+	pandoc $(PANDOC_FLAGS) -f markdown $< \
+		--standalone --include-in-header=Listings.tex \
+		--citeproc --bibliography=References.bib --csl=acm.csl \
+		-o $@ 
+
+$(BUILD_DIR)/%.pdf: $(BUILD_DIR)/%.tex
+	pdflatex --output-directory=$(BUILD_DIR) $<
+	@rm -vrf $(BUILD_DIR)/$*.log $(BUILD_DIR)/$*.aux
+
+clean:
+	if [ -d $(BUILD_DIR) ]; then rm -rf $(BUILD_DIR); fi

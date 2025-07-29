@@ -11,12 +11,16 @@ alias vf='vim ~/.bash_functions'
 
 # Arch aliases
 alias cd='z'
+alias vim='nvim'
 alias fk='fuck'
 alias sudo='doas'
+alias vn='vim ~/.config/nvim/init.lua'
 
 # GNU coreutils-related aliases
+alias rmf='rm -f'
 alias rm='rm -vi'
 alias mv='mv -vi -S .bak'
+alias cpf='cp -f'
 alias cp='cp -vi -S .bak'
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -A'
