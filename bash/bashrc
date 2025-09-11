@@ -2,7 +2,7 @@
 # NICUP14's bash interactive cofiguration file
 
 # Configures the prompt
-export PS1="[\u \[\e[38;2;252;14;99m\]\W\[\e[0m\]]$ "
+export PS1="[\u \[\e[38;5;35m\]\W\[\e[0m\]]$ "
 
 # Configures 'zoxide'
 eval "$(zoxide init bash)"

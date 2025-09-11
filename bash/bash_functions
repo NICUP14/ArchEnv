@@ -37,10 +37,10 @@ function bstat() {
 }
 
 # Backup files specified by BKPATH variable
-export BKPATH="/home/nikut"
+export BKPATH=""
 function backup()
 {
-	tar -hcvzf "$HOME/backups/$(uname -o)_$(date +%R-%d-%m-%y).tar.gz" -C "$HOME" "$(echo $BKPATH | tr ':' ' ')"
+	tar -cvzf "$HOME/Backups/$(uname -n)_$(date +%R-%d-%m-%y).tar.gz" $(echo $BKPATH | tr ':' ' ')
 }
 
 # Create a standard cpp project
