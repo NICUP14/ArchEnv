@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+scrot -d 2 ~/Pictures/screenshot_%Y-%m-%d_%H-%M-%S.png && notify-send "Screenshot" "Saved to ~/Images"

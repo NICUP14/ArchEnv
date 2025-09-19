@@ -4,14 +4,16 @@ This project hosts my personal packages and configuration files for a minimal X1
 
 Configurations:
 
-* [vim](other/vimrc)
-* [bash](bash)
-* [nvim](nvim)
-* [xinit](other/xinitrc)
-* [makefile](makefile)
+* bash
+* xorg
+* vim
+* make
+* sysctl
+* iwd
 
 Packages:
 
 * [st](docs/st.md)
 * [dwm](docs/dwm.md)
 * dwmblocks
+* wmname

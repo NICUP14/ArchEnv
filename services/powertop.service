@@ -1,0 +1,14 @@
+[Unit]
+Description=Powertop autotune
+Documentation=man:powertop(8)
+DefaultDependencies=no
+After=multi-user.target
+Before=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/powertop --auto-tune
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
