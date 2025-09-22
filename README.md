@@ -4,6 +4,7 @@ This project hosts my personal packages and configuration files for a minimal X1
 
 Configurations:
 
+* zsh
 * bash
 * xorg
 * vim
