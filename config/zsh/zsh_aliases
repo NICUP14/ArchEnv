@@ -1,0 +1,36 @@
+#!/bin/zsh
+# NICUP14's custom zsh alias definitions
+
+# Zsh configuration-related aliases
+alias sb='source ~/.zshrc'
+alias vb='vim ~/.zshrc'
+alias sa='source ~/.zsh_aliases'
+alias va='vim ~/.zsh_aliases'
+alias sf='source ~/.zsh_functions'
+alias vf='vim ~/.zsh_functions'
+
+# Arch aliases
+alias cd='z'
+alias sudo='doas'
+
+# GNU coreutils-related aliases
+alias rmf='rm -f'
+alias rm='rm -vi'
+alias mv='mv -vi -S .bak'
+alias cpf='cp -f'
+alias cp='cp -vi -S .bak'
+alias ls='ls --color=auto --group-directories-first'
+alias la='ls -A'
+alias ll='ls -lh'
+
+# Radare2-related aliases
+alias r2='radare2'
+
+# Programming-related aliases
+alias a='./a.out'
+alias m='./main'
+alias b='bin/main'
+alias mb='make && bin/main'
+alias vm='vim src/main.c*'
+alias vmk='vim [Mm]akefile'
+

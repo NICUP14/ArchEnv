@@ -17,3 +17,7 @@ Packages:
 * [dwm](docs/dwm.md)
 * dwmblocks
 * wmname
+
+Fixes:
+
+* [ThinkPad X1C8](docs/x1c8.md)

@@ -11,11 +11,11 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_red[]        = "#fc0e63";
+static const char col_green[]       = "#02ae42";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_red,  col_red  },
+	[SchemeSel]  = { col_gray4, col_green,  col_green  },
 };
 
 /* tagging */
@@ -32,7 +32,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.6; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.8; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -48,31 +48,31 @@ static const Layout layouts[] = {
 #define MODKEY Mod4Mask
 #define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ ALTKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ ALTKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ ALTKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ ALTKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_red, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *iwgtkcd[]  = { "iwgtk", NULL };
-static const char *firefoxcd[]  = { "firefox", NULL };
-static const char *qutebrowsercd[]  = { "qutebrowser", NULL };
-static const char *screenshotcd[] = { "/bin/sh ~/.local/bin/screenshot", NULL };
+static const char *vscodecmd[] = { "code", NULL };
+static const char *iwgtkcmd[]  = { "iwgtk", NULL };
+static const char *firefoxcmd[]  = { "firefox", NULL };
+static const char *qutebrowsercmd[]  = { "qutebrowser", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_grave,  spawn,          {.v = termcmd } },
-	{ ALTKEY,                       XK_e,      spawn,          {.v = iwgtkcd } },
-	{ ALTKEY,                       XK_f,      spawn,          {.v = firefoxcd } },
-	{ ALTKEY,                       XK_c,      spawn,          {.v = qutebrowsercd } },
-	{ ALTKEY,                       XK_s,      spawn,          {.v = screenshotcd } },
+	{ ALTKEY,                       XK_v,      spawn,          {.v = vscodecmd } },
+	{ ALTKEY,                       XK_e,      spawn,          {.v = iwgtkcmd } },
+	{ ALTKEY,                       XK_f,      spawn,          {.v = firefoxcmd } },
+	{ ALTKEY,                       XK_c,      spawn,          {.v = qutebrowsercmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_d,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_a,      focusstack,     {.i = -1 } },
@@ -80,20 +80,20 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_q,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_e,      setmfact,       {.f = +0.05} },
-	{ ALTKEY,                       XK_1,      zoom,           {0} },
-	{ ALTKEY,                       XK_2,      view,           {0} },
+	{ MODKEY,                       XK_1,      zoom,           {0} },
+	{ MODKEY,                       XK_2,      view,           {0} },
 	{ ALTKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_z,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_x,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[2]} },
-	{ ALTKEY,                       XK_3,      setlayout,      {0} },
-	{ ALTKEY,                       XK_4,      togglefloating, {0} },
-	// { MODKEY,                       XK_5,      view,           {.ui = ~0 } },
-	// { MODKEY,                       XK_6,      tag,            {.ui = ~0 } },
-	// { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	// { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	// { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	// { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_3,      setlayout,      {0} },
+	{ MODKEY,                       XK_4,      togglefloating, {0} },
+	{ MODKEY,                       XK_5,      view,           {.ui = ~0 } },
+	{ MODKEY,                       XK_6,      tag,            {.ui = ~0 } },
+	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

@@ -1,0 +1,38 @@
+#!/bin/zsh
+# NICUP14's Zsh interactive configuration file
+
+# Configures the prompt
+PROMPT='[%n %F{35}%1~%f]$ '
+
+# Configures 'zoxide'
+if (( $+commands[zoxide] )); then
+    eval "$(zoxide init zsh)"
+fi
+
+# Configures 'thefuck'
+if (( $+commands[thefuck] )); then
+    eval "$(thefuck --alias)"
+fi
+
+# Sources the user-defined aliases
+ZSH_ALIASES_FILE="$HOME/.zsh_aliases"
+[[ -f "$ZSH_ALIASES_FILE" ]] && source "$ZSH_ALIASES_FILE"
+
+# Sources the user-defined functions
+ZSH_FUNCTIONS_FILE="$HOME/.zsh_functions"
+[[ -f "$ZSH_FUNCTIONS_FILE" ]] && source "$ZSH_FUNCTIONS_FILE"
+
+# Enables completions
+autoload -Uz compinit
+compinit
+
+# Sets zsh options
+bindkey -v
+setopt CORRECT
+setopt APPEND_HISTORY
+setopt EXTENDED_GLOB
+bindkey '^L' clear-screen
+zstyle ':completion:*' menu select
+
+
+

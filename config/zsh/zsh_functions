@@ -1,0 +1,42 @@
+#!/bin/zsh
+# NICUP14's custom zsh function definitions
+
+# Saves output to clipboard
+c() {
+    "$@" | xclip -selection clipboard
+}
+
+# Select from output with vim then save to clipboard
+cv() {
+    "$@" | vim -c 'autocmd VimLeavePre * execute "%!xclip -selection clipboard"' \
+               -c 'set buftype=nowrite' \
+               -c 'startinsert' -
+}
+
+# Searches for a local matching PDF entry in ~/Documents/Wiki
+w() {
+    local file
+    file=$(find ~/Documents/Wiki -name '*.pdf' | fzf) && zathura "$file"
+}
+
+# Searches for a local matching text entry in ~/Documents/Wiki
+wt() {
+    local file
+    file=$(find ~/Documents/Wiki -type f | fzf) && bat "$file"
+}
+
+# Searches for a matching entry in the Arch Linux wiki
+aw() {
+    local file
+    file=$(find /usr/share/doc/arch-wiki/html -name '*.html' | fzf) && firefox "$file"
+}
+
+# Prints information regarding a given battery
+bstat() {
+    upower -i $(upower -e | grep "$@") | grep -E '(native-path|energy-rate|time to empty|capacity|percentage):'
+}
+
+# Runs "make clean" recursively
+mkrclean() {
+    find "$@" -type d -exec make -C '{}' clean \;
+}
