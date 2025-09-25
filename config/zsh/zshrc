@@ -14,6 +14,9 @@ if (( $+commands[thefuck] )); then
     eval "$(thefuck --alias)"
 fi
 
+# Configures 'markdownlint'
+export MARKDOWNLINT_CONFIG="$HOME/.markdownlint.json"
+
 # Sources the user-defined aliases
 ZSH_ALIASES_FILE="$HOME/.zsh_aliases"
 [[ -f "$ZSH_ALIASES_FILE" ]] && source "$ZSH_ALIASES_FILE"
@@ -28,11 +31,8 @@ compinit
 
 # Sets zsh options
 bindkey -v
-setopt CORRECT
+# setopt CORRECT
 setopt APPEND_HISTORY
 setopt EXTENDED_GLOB
 bindkey '^L' clear-screen
 zstyle ':completion:*' menu select
-
-
-

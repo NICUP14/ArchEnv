@@ -9,16 +9,25 @@ alias va='vim ~/.zsh_aliases'
 alias sf='source ~/.zsh_functions'
 alias vf='vim ~/.zsh_functions'
 
+# Nvim configuration-related aliases
+alias vn='vim ~/.config/nvim/init.lua'
+alias vk='vim ~/.config/nvim/lua/binds.lua'
+alias vp='vim ~/.config/nvim/lua/plugin'
+
 # Arch aliases
 alias cd='z'
 alias sudo='doas'
+alias fk='fuck'
+alias sx='startx' # X11 server
+alias fx='~/.fbtermrc' # fbterm server
+alias q='exit'
 
 # GNU coreutils-related aliases
 alias rmf='rm -f'
 alias rm='rm -vi'
 alias mv='mv -vi -S .bak'
-alias cpf='cp -f'
 alias cp='cp -vi -S .bak'
+alias ccp='command cp'
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -A'
 alias ll='ls -lh'
