@@ -9,7 +9,9 @@ alias va='vim ~/.zsh_aliases'
 alias sf='source ~/.zsh_functions'
 alias vf='vim ~/.zsh_functions'
 
-# Nvim configuration-related aliases
+# Vim/Nvim configuration-related aliases
+alias v='vim'
+alias nv='nvim'
 alias vn='vim ~/.config/nvim/init.lua'
 alias vk='vim ~/.config/nvim/lua/binds.lua'
 alias vp='vim ~/.config/nvim/lua/plugin'

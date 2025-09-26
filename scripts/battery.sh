@@ -3,7 +3,15 @@
 
 BAT=$(upower -e | grep "$1")
 INFO=$(upower -i "$BAT")
-PERC=$(echo "$INFO" | grep -oP 'percentage:\s+\K[0-9]+')
-STATE=$(echo "$INFO" | grep -oP 'state:\s+\K\w+')
 
-[[ "$STATE" == "charging" ]] && echo "${PERC}% C" || echo "$PERC%"
+RATE=$(echo "$INFO" | grep -oP 'energy-rate:\s+\K\d+\.\d+')
+STATE=$(echo "$INFO" | grep -oP 'state:\s+\K\w+')
+PERC=$(echo "$INFO" | grep -oP 'percentage:\s+\K[0-9]+')
+
+if [ $"STATE" = "charging" ]; then
+	PERC_FULL="${PERC}% C"
+else
+	PERC_FULL="${PERC}%"
+fi
+
+echo "$PERC_FULL ${RATE}W"

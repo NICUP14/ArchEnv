@@ -6,7 +6,8 @@ Docs:
 
 * [st](docs/st.md)
 * [dwm](docs/dwm.md)
-* [Powersave guide](docs/powersave.md)
+* [nvim](docs/nvim.md)
+* [Power Saving guide](docs/powersave.md)
 * [ThinkPad X1C8 Fixes](docs/x1c8.md)
 
 Configs:

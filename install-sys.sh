@@ -43,4 +43,3 @@ cp -v $PWD/config/modprobe/blacklist-mei.conf /etc/modprobe.d
 # NOTE: Cannot be symlinked 
 #--------------------------
 
-cp -v ./services/powertop.service /etc/systemd/system/powertop.service
