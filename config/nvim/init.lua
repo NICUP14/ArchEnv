@@ -27,7 +27,6 @@ vim.cmd([[
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'mfussenegger/nvim-lint'
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'chikko80/error-lens.nvim'
@@ -51,7 +50,7 @@ require("plugin.treesitter")
 require("plugin.telescope")
 require("plugin.lualine")
 require("plugin.lint")
-require("plugin.semshi")
+-- require("plugin.semshi")
 require("plugin.lsp")
 require("plugin.lsp-cmp")
 require("binds") -- NOTE: Must be last!
