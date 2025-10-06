@@ -13,9 +13,9 @@ vim.keymap.set('n', '<leader>z', builtin.current_buffer_fuzzy_find, { desc = 'Fu
 vim.keymap.set('n', '<leader>x', builtin.oldfiles, { desc = 'Open recent files' })
 
 -- Buffers
-vim.keymap.set('n', '<leader>a', ':enew<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>s', ':bnext<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>w', ':bprevious<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-n>', ':enew<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true })
 
 -- Terminal
 local term_win = nil

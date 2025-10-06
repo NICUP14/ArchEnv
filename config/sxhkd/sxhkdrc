@@ -1,0 +1,12 @@
+# Volume keys
+XF86AudioLowerVolume
+    ~/.local/scripts/volume_down.sh
+
+XF86AudioRaiseVolume
+    ~/.local/scripts/volume_up.sh
+
+XF86AudioMute
+    ~/.local/scripts/volume_mute.sh
+
+XF86AudioMicMute
+    ~/.local/scripts/mic_mute.sh

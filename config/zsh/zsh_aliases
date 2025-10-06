@@ -23,6 +23,7 @@ alias fk='fuck'
 alias sx='startx' # X11 server
 alias fx='~/.fbtermrc' # fbterm server
 alias q='exit'
+alias d='doas'
 
 # GNU coreutils-related aliases
 alias rmf='rm -f'

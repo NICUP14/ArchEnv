@@ -8,6 +8,8 @@ wmname compiz
 
 # Fixes HiDpi issues
 export QT_SCALE_FACTOR=1.5
+xrandr --output eDP1 --scale 0.55x0.55
+xrandr --output HDMI-1 --mode 1920x1080 --rate 60
 
 picom &
 
@@ -17,9 +19,11 @@ xfce4-screensaver &
 
 xfce4-power-manager &
 
-xrandr --output HDMI-1 --mode 1920x1080 --rate 60
+dunst &
 
-/usr/lib/xfce4/notifyd/xfce4-notifyd &
+sxhkd &
+
+brightnessctl s 15%
 
 # Sets up dwmblocks
 dwmblocks &

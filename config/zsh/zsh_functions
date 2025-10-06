@@ -13,22 +13,26 @@ cv() {
                -c 'startinsert' -
 }
 
+# Searches for a matching PDF entry in ~/Documents
+doc() {
+    local file
+    file=$(find ~/Documents -name '*.pdf' | fzf) && zathura "$file" &
+}
+
+# Searches for a matching entry in the Arch Linux wiki
+adoc() {
+    local file
+    file=$(find /usr/share/doc/arch-wiki/html -name '*.html' | fzf) && firefox "$file"
+}
+
 # Searches for a local matching PDF entry in ~/Documents/Wiki
-w() {
+wdoc() {
     local file
     file=$(find ~/Documents/Wiki -name '*.pdf' | fzf) && zathura "$file"
 }
 
-# Searches for a local matching text entry in ~/Documents/Wiki
-wt() {
-    local file
-    file=$(find ~/Documents/Wiki -type f | fzf) && bat "$file"
-}
-
-# Searches for a matching entry in the Arch Linux wiki
-aw() {
-    local file
-    file=$(find /usr/share/doc/arch-wiki/html -name '*.html' | fzf) && firefox "$file"
+mdv() {
+    pandoc -f gfm -t html "$@" | w3m -dump -T text/html | bat
 }
 
 # Prints information regarding a given battery
