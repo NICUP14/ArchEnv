@@ -12,20 +12,23 @@ Docs:
 
 Configs:
 
-* zsh
 * bash
-* vim
-* nvim
-* xorg
-* sysctl
-* modprobe
+* dunst
 * iwd
 * make
+* modprobe
+* nvim
+* sxhkd
+* sysctl
+* systemd
+* udev
+* vim
+* xorg
+* zathura
+* zsh
 
 Packages:
 
 * st
 * dwm
 * dwmblocks
-* wmname
-

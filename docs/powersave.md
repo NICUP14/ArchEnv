@@ -90,4 +90,4 @@ Use `swapon` to verify zram status:
 swapon --show
 ```
 
-This setup can reduce overall energy consumption by roughly 4-6 W at idle and around 7-9 W under typical workloads, improving battery life and lowering heat output.
+This setup can reduce overall energy consumption to roughly 4-6 W at idle and around 7-9 W under typical workloads, improving battery life and lowering heat output.

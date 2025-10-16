@@ -1,12 +1,16 @@
 # Volume keys
 XF86AudioLowerVolume
-    ~/.local/scripts/volume_down.sh
+    ~/.local/scripts/dec_volume.sh
 
 XF86AudioRaiseVolume
-    ~/.local/scripts/volume_up.sh
+    ~/.local/scripts/inc_volume.sh
 
 XF86AudioMute
-    ~/.local/scripts/volume_mute.sh
+    ~/.local/scripts/toggle_volume.sh
 
 XF86AudioMicMute
-    ~/.local/scripts/mic_mute.sh
+    ~/.local/scripts/toggle_mic.sh
+
+# Toggle touchpad
+alt + shift + space
+    ~/.local/scripts/toggle_touchpad.sh

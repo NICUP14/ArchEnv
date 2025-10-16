@@ -1,0 +1,2 @@
+# Vial / Corne v4 split keyboard
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="4653", ATTRS{idProduct}=="0004", MODE="0666", TAG+="uaccess", TAG+="udev-acl"

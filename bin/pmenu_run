@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case $(echo "lock\nsuspend\nreboot\npoweroff" | dmenu "$@") in
+    lock)
+        xfce4-screensaver-command -l
+	;;
+    suspend)
+        systemctl suspend
+        ;;
+    poweroff)
+        systemctl poweroff
+        ;;
+    reboot)
+        systemctl reboot
+        ;;
+    *)
+        exit 0
+        ;;
+esac

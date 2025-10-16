@@ -56,9 +56,28 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* commands */
+/* menus */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { 
+    "dmenu_run", "-m", dmenumon,
+    "-fn", dmenufont,
+    "-nb", col_gray1,
+    "-nf", col_gray3,
+    "-sb", col_green,
+    "-sf", col_gray4,
+    NULL
+};
+static const char *pmenucmd[] = {
+    "pmenu_run", "-m", dmenumon,
+    "-fn", dmenufont,
+    "-nb", col_gray1,
+    "-nf", col_gray3,
+    "-sb", col_green,
+    "-sf", col_gray4,
+    NULL
+};
+
+/* commands */
 static const char *termcmd[]  = { "st", NULL };
 static const char *vscodecmd[] = { "code", NULL };
 static const char *iwgtkcmd[]  = { "iwgtk", NULL };
@@ -66,6 +85,7 @@ static const char *firefoxcmd[]  = { "firefox", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ ALTKEY|ShiftMask,             XK_w,      spawn,          { .v = pmenucmd } },
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_grave,  spawn,          {.v = termcmd } },
 	{ ALTKEY,                       XK_v,      spawn,          {.v = vscodecmd } },

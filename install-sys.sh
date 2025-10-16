@@ -71,6 +71,7 @@ replace_dir() {
 for file in ./bin/*; do
     replace "$file" /bin
     chown root:root "/bin/$(basename $file)"
+    chmod +x "/bin/$(basename $file)"
 done
 
 #--------------------
