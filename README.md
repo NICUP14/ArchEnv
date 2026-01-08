@@ -12,6 +12,7 @@ Docs:
 
 Configs:
 
+* auto-cpufreq
 * bash
 * dunst
 * iwd
@@ -21,6 +22,7 @@ Configs:
 * sxhkd
 * sysctl
 * systemd
+* tlp
 * udev
 * vim
 * xorg

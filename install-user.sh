@@ -78,7 +78,9 @@ replace ./config/zsh/zsh_aliases ~/.zsh_aliases
 replace ./config/zsh/zsh_functions ~/.zsh_functions
 
 # vim
+mkdir -p ~/.vim/colors
 replace ./config/vim/vimrc ~/.vimrc
+replace ./config/vim/colors/dracula.vim ~/.vim/colors
 
 # xorg
 replace ./config/xorg/xinitrc ~/.xinitrc

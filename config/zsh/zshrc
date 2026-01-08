@@ -1,21 +1,34 @@
 #!/bin/zsh
 # NICUP14's Zsh interactive configuration file
 
-# Configures the prompt
-PROMPT='[%n %F{35}%1~%f]$ '
-
 # Configures 'zoxide'
 if (( $+commands[zoxide] )); then
     eval "$(zoxide init zsh)"
 fi
 
-# Configures 'thefuck'
-if (( $+commands[thefuck] )); then
-    eval "$(thefuck --alias)"
+# Configures the user's local bin
+export LBIN_PATH="$HOME/.local/bin"
+if [ -d "$LBIN_PATH" ]; then
+    if [[ ! ":$PATH" == ":$LBIN_PATH" ]]; then
+        export PATH="$PATH:$LBIN_PATH"
+    fi
+fi
+
+# Configures the user's python bin
+export PYBIN_PATH="$HOME/.local/pybin"
+if [ -d "$PYBIN_PATH" ]; then
+    source "$PYBIN_PATH/env/bin/activate"
+
+    if [[ ! ":$PATH:" == ":$PYBIN_PATH" ]]; then
+        export PATH="$PATH:$PYBIN_PATH"
+    fi
 fi
 
 # Configures 'markdownlint'
 export MARKDOWNLINT_CONFIG="$HOME/.markdownlint.json"
+
+# Configures the prompt
+PROMPT='[%n %F{35}%1~%f]$ '
 
 # Sources the user-defined aliases
 ZSH_ALIASES_FILE="$HOME/.zsh_aliases"

@@ -31,13 +31,19 @@ wdoc() {
     file=$(find ~/Documents/Wiki -name '*.pdf' | fzf) && zathura "$file"
 }
 
+# Displays stylized markdown directly inside the terminal
 mdv() {
-    pandoc -f gfm -t html "$@" | w3m -dump -T text/html | bat
+    pandoc -f gfm -t html "$@" | w3m -dump -T text/html | bat --style=grid
 }
 
-# Prints information regarding a given battery
+# Prints all information regarding a given battery
+bfstat() {
+    upower -i $(upower -e | grep "$@") | bat --style=grid
+}
+
+# Prints simplified information regarding a given battery
 bstat() {
-    upower -i $(upower -e | grep "$@") | grep -E '(native-path|energy-rate|time to empty|capacity|percentage):'
+    upower -i $(upower -e | grep "$@") | grep -E '(state|native-path|energy-rate|time to empty|capacity|percentage):' | bat --style=grid
 }
 
 # Runs "make clean" recursively

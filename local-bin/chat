@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cd ~/LLM/llamacpp-bin
+./llama-server \
+    -m ~/LLM/Models/Llama-3.2-3B-Instruct-Q8_0.gguf > /dev/null 2>&1 &
+
+llm_pid=$(pgrep -f "llama-server.*Llama-3.2-3B-Instruct-Q8_0.gguf")
+trap "kill $llm_pid 2>/dev/null" EXIT
+
+cd ~/LLM/llamacpp-chat
+./chat-tui

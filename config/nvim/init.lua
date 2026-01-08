@@ -1,22 +1,8 @@
 -- NICUP14's NeoVim configuration file
 
--- Basic Vim options
-local opt = vim.opt
-opt.compatible = false
-opt.showmatch = true
-opt.ignorecase = true
-opt.hlsearch = true
-opt.incsearch = true
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.expandtab = true
-opt.shiftwidth = 4
-opt.autoindent = true
-opt.number = true
-opt.wildmode = "longest,list"
-opt.clipboard = "unnamedplus"
-opt.cursorline = true
-opt.ttyfast = true
+-- Basic Vim options (automatically sourced)
+-- local opt = vim.opt
+vim.cmd("source ~/.vimrc")
 
 -- Enable filetype plugins and indent
 vim.cmd("filetype plugin indent on")

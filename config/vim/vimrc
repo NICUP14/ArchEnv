@@ -1,10 +1,39 @@
 " NICUP14's vim configuration file
 
-" General options
+" Theme
+if !has('nvim')
+    " colorscheme dracula
+endif
+
+" General
+set nocompatible
 syntax on
-filetype on
-set nowrap
+filetype plugin indent on
+
+" UI
 set number
-set smartindent
-set incsearch
+set wrap
 set background=dark
+
+" Searching
+set ignorecase
+set incsearch
+set showmatch
+set nohlsearch
+
+" Indentation
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+" set autoindent
+
+" Disable folding
+set nofoldenable
+set foldmethod=manual
+set foldlevel=99
+
+" Performance
+set lazyredraw
+set updatetime=300

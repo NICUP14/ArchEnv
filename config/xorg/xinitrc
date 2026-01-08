@@ -7,9 +7,7 @@ fi
 wmname compiz
 
 # Fixes HiDpi issues
-export GDK_SCALE=1
-export QT_SCALE_FACTOR=1.5
-xrandr --output eDP1 --scale 0.55x0.55
+xrandr --output eDP1 --scale 0.35x0.35
 xrandr --output HDMI-1 --mode 1920x1080 --rate 60
 
 # Sets up services
@@ -26,9 +24,9 @@ dunst &
 
 sxhkd &
 
-brightnessctl s 15%
-
 dwmblocks &
+
+brightnessctl s 10%
 
 # Sets up background image
 ~/.fehbg &

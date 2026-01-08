@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case $(echo "Off\nLow\nHigh" | dmenu -p "Backlight:" "$@") in
+    Off)
+        code=0
+        ;;
+    Low)
+        code=1
+        ;;
+    High)
+        code=2
+        ;;
+    *)
+        exit 0
+        ;;
+esac
+
+echo "$code" > /sys/class/leds/tpacpi::kbd_backlight/brightness
+

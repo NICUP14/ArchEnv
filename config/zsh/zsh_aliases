@@ -11,19 +11,30 @@ alias vf='vim ~/.zsh_functions'
 
 # Vim/Nvim configuration-related aliases
 alias v='vim'
-alias nv='nvim'
+alias n='nvim'
+alias vv='vim ~/.vimrc'
 alias vn='vim ~/.config/nvim/init.lua'
 alias vk='vim ~/.config/nvim/lua/binds.lua'
 alias vp='vim ~/.config/nvim/lua/plugin'
 
+# Trash aliases
+alias t='trash'
+alias tr='trash-restore'
+alias tls='trash-list'
+
 # Arch aliases
 alias cd='z'
+alias d='doas'
+alias q='exit'
 alias sudo='doas'
-alias fk='fuck'
 alias sx='startx' # X11 server
 alias fx='~/.fbtermrc' # fbterm server
-alias q='exit'
-alias d='doas'
+alias enc='gpg -c --cipher-algo AES256'
+
+# ADB
+alias pmls='./adb shell pm list packages'
+alias pmrm='./adb shell pm disable-user --user 0'
+alias pmadd='./adb shell pm enable'
 
 # GNU coreutils-related aliases
 alias rmf='rm -f'
@@ -34,15 +45,3 @@ alias ccp='command cp'
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -A'
 alias ll='ls -lh'
-
-# Radare2-related aliases
-alias r2='radare2'
-
-# Programming-related aliases
-alias a='./a.out'
-alias m='./main'
-alias b='bin/main'
-alias mb='make && bin/main'
-alias vm='vim src/main.c*'
-alias vmk='vim [Mm]akefile'
-

@@ -1,0 +1,39 @@
+# Start D-Bus session if not already running
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+    eval "$(dbus-launch --sh-syntax --exit-with-session)"
+fi
+
+# Fixes Logisim
+wmname compiz
+
+# Fixes HiDpi issues
+export GDK_SCALE=1
+#export QT_SCALE_FACTOR=1.5
+xrandr --output eDP1 --scale 0.35x0.35
+xrandr --output HDMI-1 --mode 1920x1080 --rate 60
+
+# Sets up services
+
+picom &
+
+unclutter &
+
+xfce4-screensaver &
+
+xfce4-power-manager &
+
+dunst &
+
+sxhkd &
+
+brightnessctl s 10%
+
+dwmblocks &
+
+# Sets up background image
+~/.fehbg &
+
+# Disables screen blanking & DPMS
+xset s off -dpms
+
+exec dwm
