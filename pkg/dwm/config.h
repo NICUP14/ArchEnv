@@ -11,12 +11,12 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 //static const char col_gray4[]     = "#eeeeee";
-static const char col_gray4[]       = "#262b32";
-static const char col_purple[]        = "#db81fc";
+static const char col_gray4[]       = "#e3be7a";
+static const char col_yellow[]      = "#272b33";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_purple, col_gray4,  col_purple  },
+	[SchemeSel]  = { col_gray4, col_yellow, col_gray4  },
 };
 
 /* tagging */
@@ -65,7 +65,7 @@ static const char *dmenucmd[] = {
     "-nb", col_gray1,
     "-nf", col_gray3,
     "-sb", col_gray4,
-    "-sf", col_purple,
+    "-sf", col_yellow,
     NULL
 };
 static const char *pmenucmd[] = {
@@ -74,7 +74,7 @@ static const char *pmenucmd[] = {
     "-nb", col_gray1,
     "-nf", col_gray3,
     "-sb", col_gray4,
-    "-sf", col_purple,
+    "-sf", col_yellow,
     NULL
 };
 static const char *kmenucmd[] = {
@@ -83,7 +83,7 @@ static const char *kmenucmd[] = {
     "-nb", col_gray1,
     "-nf", col_gray3,
     "-sb", col_gray4,
-    "-sf", col_purple,
+    "-sf", col_yellow,
     NULL
 };
 

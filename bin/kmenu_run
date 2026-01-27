@@ -1,6 +1,6 @@
 #!/bin/sh
 
-case $(echo "Off\nLow\nHigh" | dmenu -p "Backlight:" "$@") in
+case $(echo -e "Off\nLow\nHigh" | dmenu -p "Backlight:" "$@") in
     Off)
         code=0
         ;;

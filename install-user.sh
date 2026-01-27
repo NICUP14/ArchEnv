@@ -63,6 +63,10 @@ replace_dir() {
 # Binaries
 #---------
 
+mkdir -p ~/.local/bin
+replace_dir ./local-bin ~/.local/bin
+chmod +x ~/.local/bin/*
+
 #--------------------
 # Configuration Files
 #--------------------

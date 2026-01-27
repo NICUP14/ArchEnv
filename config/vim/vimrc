@@ -2,7 +2,7 @@
 
 " Theme
 if !has('nvim')
-    " colorscheme dracula
+    colorscheme dracula
 endif
 
 " General

@@ -23,16 +23,19 @@ Configuration: [config.h](../dwm/config.h)
 | setmfact            | Super + e
 | zoom                | Super + 1
 | view                | Super + 2
-| togglefloating      | Super + 4
+| setlayout (toggle)  | Super + 3
 | setlayout (tiled)   | Super + z
 | setlayout (floating)| Super + x
 | setlayout (monocle) | Super + c
-| setlayout (toggle)  | Super + 3
+| spawn (code)        | Super + v
 | spawn (iwgtk)       | Alt + e
 | spawn (firefox)     | Alt + f
-| spawn (qutebrowser) | Alt + c
+| spawn (thunar)      | Alt + w
+| spawn (xarchiver)   | Alt + c
 | killclient          | Alt + q
 | toggletag           | Alt + 1–9
+| power menu          | Alt + Shift + w
+| backlight menu      | Alt + Shift + e
 | quit                | Alt + Shift + q
 
 ## Installation

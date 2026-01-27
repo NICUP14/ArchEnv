@@ -78,6 +78,9 @@ done
 # Configuration Files
 #--------------------
 
+# autocpu-freq
+replace $PWD/config/auto-cpufreq/auto-cpufreq.conf /etc
+
 # xorg
 mkdir -p /etc/X11/xorg.conf.d
 replace ./config/xorg/40-libinput.conf /etc/X11/xorg.conf.d
@@ -85,17 +88,9 @@ replace ./config/xorg/40-libinput.conf /etc/X11/xorg.conf.d
 # iwd
 replace $PWD/config/iwd/main.conf /etc/iwd
 
-# systemd-logind
-mkdir -p /etc/
-replace_dir ./config/systemd /etc/systemd
+# udev
+replace_dir $PWD/config/udev /etc/udev/rules.d
 
-# sysctl hardening
-mkdir -p /etc/sysctl.d
-replace_dir ./config/sysctl /etc/sysctl.d
-
-# modprobe.d
-mkdir -p /etc/modprobe.d
-replace_dir ./config/modprobe /etc/modprobe.d
 
 #--------
 # Scripts

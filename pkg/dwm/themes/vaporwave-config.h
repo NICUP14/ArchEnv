@@ -12,11 +12,11 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 //static const char col_gray4[]     = "#eeeeee";
 static const char col_gray4[]       = "#262b32";
-static const char col_blue[]        = "#56a4ec";
+static const char col_purple[]        = "#db81fc";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_blue, col_gray4,  col_blue  },
+	[SchemeSel]  = { col_purple, col_gray4,  col_purple  },
 };
 
 /* tagging */
@@ -65,7 +65,7 @@ static const char *dmenucmd[] = {
     "-nb", col_gray1,
     "-nf", col_gray3,
     "-sb", col_gray4,
-    "-sf", col_blue,
+    "-sf", col_purple,
     NULL
 };
 static const char *pmenucmd[] = {
@@ -74,24 +74,38 @@ static const char *pmenucmd[] = {
     "-nb", col_gray1,
     "-nf", col_gray3,
     "-sb", col_gray4,
-    "-sf", col_blue,
+    "-sf", col_purple,
+    NULL
+};
+static const char *kmenucmd[] = {
+    "kmenu_run", "-m", dmenumon,
+    "-fn", dmenufont,
+    "-nb", col_gray1,
+    "-nf", col_gray3,
+    "-sb", col_gray4,
+    "-sf", col_purple,
     NULL
 };
 
 /* commands */
-static const char *termcmd[]  = { "st", NULL };
-static const char *vscodecmd[] = { "code", NULL };
-static const char *iwgtkcmd[]  = { "iwgtk", NULL };
+static const char *termcmd[]     = { "st", NULL };
+static const char *vscodecmd[]   = { "code", NULL };
+static const char *iwgtkcmd[]    = { "iwgtk", NULL };
 static const char *firefoxcmd[]  = { "firefox", NULL };
+static const char *filemgrcmd[]  = { "thunar", NULL };
+static const char *filearccmd[]  = { "xarchiver", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ ALTKEY|ShiftMask,             XK_w,      spawn,          { .v = pmenucmd } },
+	{ ALTKEY|ShiftMask,             XK_e,      spawn,          { .v = kmenucmd } },
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_grave,  spawn,          {.v = termcmd } },
 	{ ALTKEY,                       XK_v,      spawn,          {.v = vscodecmd } },
 	{ ALTKEY,                       XK_e,      spawn,          {.v = iwgtkcmd } },
 	{ ALTKEY,                       XK_f,      spawn,          {.v = firefoxcmd } },
+	{ ALTKEY,                       XK_w,      spawn,          {.v = filemgrcmd } },
+	{ ALTKEY,                       XK_c,      spawn,          {.v = filearccmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_d,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_a,      focusstack,     {.i = -1 } },

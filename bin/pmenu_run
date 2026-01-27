@@ -1,6 +1,6 @@
 #!/bin/sh
 
-case $(echo "lock\nsuspend\nreboot\npoweroff" | dmenu "$@") in
+case $(echo -e "lock\nsuspend\nreboot\npoweroff" | dmenu "$@") in
     lock)
         xfce4-screensaver-command -l
 	;;

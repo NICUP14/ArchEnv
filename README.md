@@ -17,11 +17,9 @@ Configs:
 * dunst
 * iwd
 * make
-* modprobe
 * nvim
 * sxhkd
 * sysctl
-* systemd
 * tlp
 * udev
 * vim

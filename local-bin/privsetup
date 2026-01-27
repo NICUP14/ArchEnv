@@ -1,0 +1,78 @@
+#!/bin/sh
+
+# Sets POSIX strict mode
+set -eu
+
+TARGET_USER="nikut"
+DEVICE="/dev/nvme0n1p2"
+MAPPER_NAME="priv"
+UNMOUNT_AFTER=600   # 10 minutes
+
+TARGET_HOME="$(getent passwd "$TARGET_USER" | cut -d: -f6)"
+MOUNT_POINT="$TARGET_HOME/Private"
+
+# Ensure script is run as root
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Missing required super-user permissions." >&2
+    exit 1
+fi
+
+privclose() {
+    if ! mountpoint -q "$MOUNT_POINT"; then
+        echo "$MOUNT_POINT is not mounted." >&2
+        return 1
+    fi
+
+    # Unmounts the mapped LUKS container
+    umount "$MOUNT_POINT"
+
+    # Resets the ownership of the container
+    chown root:root "$MOUNT_POINT"
+
+    # Closes the LUKS container if still active
+    if cryptsetup status "$MAPPER_NAME" >/dev/null 2>&1; then
+        cryptsetup close "$MAPPER_NAME"
+    fi
+
+    echo "-> Unmounted successfully!"
+}
+
+privopen() {
+    if mountpoint -q "$MOUNT_POINT"; then
+        echo "$MOUNT_POINT is already mounted." >&2
+        return 1
+    fi
+
+    # Opens the LUKS container
+    echo "Opening LUKS container $DEVICE..."
+    cryptsetup open "$DEVICE" "$MAPPER_NAME"
+
+    # Mounts the mapped LUKS container
+    echo "Mounting /dev/mapper/$MAPPER_NAME on $MOUNT_POINT..."
+    mount "/dev/mapper/$MAPPER_NAME" "$MOUNT_POINT"
+
+    # Sets the ownership of the mountpoint
+    echo "Setting ownership of $MOUNT_POINT to $TARGET_USER ..."
+    chown "$TARGET_USER":"$TARGET_USER" "$MOUNT_POINT"
+
+    echo "-> Mounted successfully! It will be automatically unmounted in $((UNMOUNT_AFTER / 60)) minutes."
+
+    # Sets the background job for automatic closing of the container
+    systemd-run \
+        --unit="privsetup-autoclose-$$" \
+        --on-active="$UNMOUNT_AFTER" \
+        --service-type=oneshot \
+        /bin/sh -c "$0 close"
+}
+
+# Main entry point
+option=${1:-}
+
+if [ "$option" = "open" ]; then
+    privopen || exit $?
+elif [ "$option" = "close" ]; then
+    privclose || exit $?
+else
+    echo "Usage: $0 {open|close}" >&2
+    exit 2
+fi

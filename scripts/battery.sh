@@ -9,7 +9,7 @@ STATE=$(echo "$INFO" | grep -oP 'state:\s+\K\w+')
 PERC=$(echo "$INFO" | grep -oP 'percentage:\s+\K[0-9]+')
 
 if [ "$STATE" = "charging" ]; then
-	PERC_FULL="${PERC}% C"
+	PERC_FULL="${PERC}%C"
 else
 	PERC_FULL="${PERC}%"
 fi
