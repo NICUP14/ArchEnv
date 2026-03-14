@@ -14,16 +14,6 @@ if [ -d "$LBIN_PATH" ]; then
     fi
 fi
 
-# Configures the user's python bin
-export PYBIN_PATH="$HOME/.local/pybin"
-if [ -d "$PYBIN_PATH" ]; then
-    source "$PYBIN_PATH/env/bin/activate"
-
-    if [[ ! ":$PATH:" == ":$PYBIN_PATH" ]]; then
-        export PATH="$PATH:$PYBIN_PATH"
-    fi
-fi
-
 # Configures 'markdownlint'
 export MARKDOWNLINT_CONFIG="$HOME/.markdownlint.json"
 
@@ -44,7 +34,6 @@ compinit
 
 # Sets zsh options
 bindkey -v
-# setopt CORRECT
 setopt APPEND_HISTORY
 setopt EXTENDED_GLOB
 bindkey '^L' clear-screen

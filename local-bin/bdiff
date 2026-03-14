@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+"""
+Find lines that exist in one file but not in the other.
+Shows unique lines in each file.
+"""
+
+import sys
+
+
+def find_unique_lines(file1_path, file2_path):
+    """
+    Find lines unique to each file.
+
+    Returns:
+        tuple: (unique_to_file1, unique_to_file2, common_lines)
+    """
+    # Read and normalize lines from both files
+    try:
+        with open(file1_path, 'r', encoding='utf-8') as f:
+            file1_lines = set(line.rstrip('\n\r') for line in f)
+    except FileNotFoundError:
+        print(f"Error: File not found - {file1_path}")
+        sys.exit(1)
+    except PermissionError:
+        print(f"Error: Permission denied - {file1_path}")
+        sys.exit(1)
+
+    try:
+        with open(file2_path, 'r', encoding='utf-8') as f:
+            file2_lines = set(line.rstrip('\n\r') for line in f)
+    except FileNotFoundError:
+        print(f"Error: File not found - {file2_path}")
+        sys.exit(1)
+    except PermissionError:
+        print(f"Error: Permission denied - {file2_path}")
+        sys.exit(1)
+
+    # Calculate differences
+    unique_to_file1 = file1_lines - file2_lines
+    unique_to_file2 = file2_lines - file1_lines
+    common_lines = file1_lines & file2_lines
+
+    return unique_to_file1, unique_to_file2, common_lines
+
+
+def main():
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <file1> <file2>")
+        print("Example: python script.py file1.txt file2.txt")
+        sys.exit(1)
+
+    file1_path = sys.argv[1]
+    file2_path = sys.argv[2]
+
+    unique_to_file1, unique_to_file2, common = find_unique_lines(
+        file1_path, file2_path
+    )
+
+    # Summary
+    print(f"\n{'='*60}")
+    print(f"File Comparison: {file1_path} vs {file2_path}")
+    print(f"{'='*60}")
+    print(f"Lines unique to {file1_path}: {len(unique_to_file1)}")
+    print(f"Lines unique to {file2_path}: {len(unique_to_file2)}")
+    print(f"Common lines: {len(common)}")
+    print(f"{'='*60}\n")
+
+    # Show unique lines in file1
+    if unique_to_file1:
+        print(f"--- Unique in {file1_path} ---")
+        for line in sorted(unique_to_file1):
+            print(f"  + {line}")
+        print()
+
+    # Show unique lines in file2
+    if unique_to_file2:
+        print(f"--- Unique in {file2_path} ---")
+        for line in sorted(unique_to_file2):
+            print(f"  - {line}")
+        print()
+
+    # No differences
+    if not unique_to_file1 and not unique_to_file2:
+        print("✓ Files are identical (ignoring order)")
+
+
+if __name__ == "__main__":
+    main()

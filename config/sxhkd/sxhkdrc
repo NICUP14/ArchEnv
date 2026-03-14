@@ -14,3 +14,12 @@ XF86AudioMicMute
 # Toggle touchpad
 alt + shift + space
     ~/.local/scripts/toggle_touchpad.sh
+
+# Take full screenshot
+Print
+    /usr/bin/flameshot full
+
+# Take custom screenshot
+shift + Print
+    /usr/bin/flameshot gui
+

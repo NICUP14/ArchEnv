@@ -26,7 +26,7 @@ sxhkd &
 
 dwmblocks &
 
-brightnessctl s 10%
+brightnessctl s 30%
 
 # Sets up background image
 ~/.fehbg &
