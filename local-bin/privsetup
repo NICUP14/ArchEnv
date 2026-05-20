@@ -64,16 +64,17 @@ privopen() {
     chown "$user":"$user" "$mount_point"
 
     # Determines timer duration
-    local timeout=$(("${1:=$default_timeout}" * 60))
+    local timeout_min=${1:-$default_timeout}
+    local timeout_sec=$((timeout_min * 60))
 
     # Sets the background job for automatic closing of the container
     systemd-run \
         --unit="privsetup-autoclose-$$" \
-        --on-active="$timeout" \
+        --on-active="$timeout_sec" \
         --service-type=oneshot \
         /bin/sh -c "$(readlink -f $0) close"
 
-    echo "-> Mounted successfully! It will be automatically unmounted in $((timeout / 60)) minutes."
+    echo "-> Mounted successfully! It will be automatically unmounted in $timeout_min minutes."
 }
 
 # Main entry point

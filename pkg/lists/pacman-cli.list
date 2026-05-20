@@ -13,6 +13,7 @@ cmake
 cryptsetup
 debugedit
 dhcpcd
+dnsmasq
 dysk
 efibootmgr
 entr
@@ -31,7 +32,6 @@ iwd
 jq
 make
 nmap
-opendoas
 pandoc-cli
 pass
 patch

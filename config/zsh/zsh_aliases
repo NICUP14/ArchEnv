@@ -29,7 +29,7 @@ alias q='exit'
 alias sudo='doas'
 alias sx='startx' # X11 server
 alias fx='~/.fbtermrc' # fbterm server
-alias enc='gpg -c --cipher-algo AES256'
+alias chat='ollama run mistral'
 
 # ADB
 alias pmls='./adb shell pm list packages'

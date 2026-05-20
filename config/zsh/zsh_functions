@@ -16,7 +16,7 @@ cv() {
 # Searches for a matching PDF entry in ~/Documents
 doc() {
     local file
-    file=$(find ~/Documents -name '*.pdf' | fzf) && zathura "$file" &
+    file=$(find -L ~/Documents -name '*.pdf' | fzf) && firefox "$file" &
 }
 
 # Searches for a matching entry in the Arch Linux wiki
@@ -25,15 +25,14 @@ adoc() {
     file=$(find /usr/share/doc/arch-wiki/html -name '*.html' | fzf) && firefox "$file"
 }
 
-# Searches for a local matching PDF entry in ~/Documents/Wiki
-wdoc() {
-    local file
-    file=$(find ~/Documents/Wiki -name '*.pdf' | fzf) && zathura "$file"
-}
-
 # Displays stylized markdown directly inside the terminal
 mdv() {
     pandoc -f gfm -t html "$@" | w3m -dump -T text/html | bat --style=grid
+}
+
+# Converts a markdown file to pdf format
+mdp() {
+    pandoc -f gfm -t pdf "$@" -o "${@%.md}.pdf" --include-in-header=~/.local/Listings.tex --listings
 }
 
 # Prints all information regarding a given battery

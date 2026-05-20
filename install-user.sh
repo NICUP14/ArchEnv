@@ -101,10 +101,6 @@ replace ./config/sxhkd/sxhkdrc ~/.config/sxhkd
 mkdir -p ~/.config/nvim
 replace_dir ./config/nvim ~/.config/nvim
 
-# zathura
-mkdir -p ~/.config/zathura
-replace_dir ./config/zathura ~/.config/zathura
-
 #--------
 # Scripts
 #--------
