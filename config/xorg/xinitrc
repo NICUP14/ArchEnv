@@ -1,7 +1,16 @@
+#!/bin/sh
+
+export XDG_CURRENT_DESKTOP=GNOME
+export XDG_SESSION_TYPE=x11
+export GTK_USE_PORTAL=1
+
 # Start D-Bus session if not already running
 if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
     eval "$(dbus-launch --sh-syntax --exit-with-session)"
 fi
+
+# Push environment variables to D-Bus
+dbus-update-activation-environment DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE GTK_USE_PORTAL
 
 # Fixes Logisim
 wmname compiz
@@ -19,6 +28,8 @@ unclutter &
 xfce4-screensaver &
 
 xfce4-power-manager &
+
+/usr/lib/xdg-desktop-portal-gtk &
 
 dunst &
 

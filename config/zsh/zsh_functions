@@ -3,7 +3,7 @@
 
 # Saves output to clipboard
 c() {
-    "$@" | xclip -selection clipboard
+    "$@" | xclip -selection clipboard && echo "Copied to clipboard."
 }
 
 # Select from output with vim then save to clipboard
@@ -25,27 +25,62 @@ adoc() {
     file=$(find /usr/share/doc/arch-wiki/html -name '*.html' | fzf) && firefox "$file"
 }
 
+# Prints lines unique to the first file, then to the second, then the common lines
+tdiff() {
+    if [ $# -ne 2 ]; then
+        echo "Usage: tdiff [file1] [file2]" >&2
+        return 1
+    fi
+
+    if [ ! -r "$1" ]; then
+        echo "$0: Cannot read file $1." >&2
+        return 1
+    fi
+
+    if [ ! -r "$2" ]; then
+        echo "$0: Cannot read file $2." >&2
+        return 1
+    fi
+
+    echo "Unique to $1:"
+    comm -23 <(sort -u "$1") <(sort -u "$2")
+    echo
+    echo "Unique to $2:"
+    comm -13 <(sort -u "$1") <(sort -u "$2")
+    echo
+    echo "Common lines:"
+    comm -12 <(sort -u "$1") <(sort -u "$2")
+}
+
 # Displays stylized markdown directly inside the terminal
 mdv() {
-    pandoc -f gfm -t html "$@" | w3m -dump -T text/html | bat --style=grid
+    pandoc -f gfm -t html "$1" | w3m -dump -T text/html | bat --style=grid
 }
 
 # Converts a markdown file to pdf format
 mdp() {
-    pandoc -f gfm -t pdf "$@" -o "${@%.md}.pdf" --include-in-header=~/.local/Listings.tex --listings
+    pandoc -f gfm -t pdf "$1" -o "${1%.md}.pdf" --include-in-header=$HOME/.local/Listings.tex --listings
 }
 
 # Prints all information regarding a given battery
 bfstat() {
-    upower -i $(upower -e | grep "$@") | bat --style=grid
+    local device=$(upower -e | grep "$1" | head -n 1)
+    upower -i "$device" | bat --style=grid
 }
 
 # Prints simplified information regarding a given battery
 bstat() {
-    upower -i $(upower -e | grep "$@") | grep -E '(state|native-path|energy-rate|time to empty|capacity|percentage):' | bat --style=grid
+    local device=$(upower -e | grep "$1" | head -n 1)
+    upower -i "$device" | grep -E '(state|native-path|energy-rate|time to empty|capacity|percentage):' | bat --style=grid
 }
 
 # Runs "make clean" recursively
 mkrclean() {
-    find "$@" -type d -exec make -C '{}' clean \;
+    local dir="${1:-.}"
+    if [[ ! -d "$dir" ]]; then
+        echo "mkrclean: '$dir' is not a directory" >&2
+        return 1
+    fi
+
+    find "$dir" -type f -iname Makefile -execdir make clean \;
 }

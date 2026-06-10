@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -eu
+
+if [ $# -eq 0 ]; then
+    systemd-inhibit --what=idle --who="manual" --why="Manual indefinite inhibit" \
+        bash -c 'read -p "-> Inhibiting indefinitely. Press Enter to stop."'
+else
+    timeout_min="$1"
+    timeout=$((timeout_min * 60))
+
+    systemd-inhibit --what=idle --who="manual" --why="Manual timed inhibit ($1 min)" \
+        sleep infinity &
+    pid=$!
+
+    systemd-run \
+        --unit="inh-$$" \
+        --on-active="$timeout" \
+        --service-type=oneshot \
+        kill "$pid"
+
+    echo "-> Inhibited successfully! It will be automatically lifted in $timeout_min minutes."
+fi
+

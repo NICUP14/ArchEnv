@@ -1,11 +1,17 @@
 #!/bin/sh
 
-case $(echo -e "lock\nsuspend\nreboot\npoweroff" | dmenu "$@") in
+case $(echo -e "off\nlock\nsuspend\nhibernate\nreboot\npoweroff" | dmenu "$@") in
+    off)
+        xset dpms force off
+        ;;
     lock)
         xfce4-screensaver-command -l
-	;;
+        ;;
     suspend)
         systemctl suspend
+        ;;
+    hibernate)
+        systemctl hibernate
         ;;
     poweroff)
         systemctl poweroff

@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# Sets POSIX strict mode
+set -eu
+
+if [ ! -f ~/.pdfocr_env ]; then
+    echo "$0: Missing required configuration file: ~/.pdfocr_env"
+    exit 1
+fi
+
+# Reads $tmp_dir, $lang and $dpi
+. ~/.pdfocr_env
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 [pdf_file]" >&2
+    exit 2
+fi
+
+input_file="$1"
+output_file="${input_file%.*}.txt"
+
+# Validates input file
+if [ ! -f "$input_file" ]; then
+    echo "$0: Required input file does not exist."
+    exit 1
+fi
+if [[ "$input_file" != *.pdf ]]; then
+    echo "$0: Required input file is not a PDF document."
+    exit 1
+fi
+
+tmp_dir=$(mktemp -d)
+
+echo "Extracting images..."
+pdftoppm -png -r "$dpi" "$input_file" "$tmp_dir/page"
+
+# Grabs the first file produced by pdftoppm
+first_page=$(ls -1 "$tmp_dir" 2>/dev/null | head -n 1)
+if [ -z "$first_page" ]; then
+    echo "$0: Missing images produced by pdftoppm."
+    exit 1
+fi
+
+page_cnt=$(ls -1 "$tmp_dir" 2>/dev/null | wc -l)
+echo "Extracted $page_cnt images."
+echo
+
+# Detects the pdftoppm number format
+# Note: Determines the padding length of the pdf filenames
+first_page_basename=$(basename "$first_page")
+num_str=$(echo "$first_page_basename" | sed 's/.*-\([0-9]*\)\.png/\1/')
+num_len=${#num_str}
+
+echo "Running OCR on every page..."
+for num in $(seq 1 $page_cnt); do
+    # Formats the number based on the detected convention
+    padded_num=$(printf "%0${num_len}d" "$num")
+
+    base="$tmp_dir/page-${padded_num}"
+    img_file="$base.png"
+    txt_file="page-${padded_num}.txt"
+
+    echo "Processing page $num..."
+    if tesseract "$img_file" "$base" --psm 6 --oem 1 --lang "$lang" > /dev/null 2>&1; then
+        echo "Success: $txt_file"
+    else
+        echo "Error: $txt_file"
+    fi
+done
+echo
+
+echo "Combining results..."
+cat "$tmp_dir"/*.txt > "$output_file"
+
+echo "-> Saved results to $output_file"
