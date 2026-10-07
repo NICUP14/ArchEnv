@@ -78,9 +78,6 @@ done
 # Configuration Files
 #--------------------
 
-# autocpu-freq
-replace $PWD/config/auto-cpufreq/auto-cpufreq.conf /etc
-
 # xorg
 mkdir -p /etc/X11/xorg.conf.d
 replace ./config/xorg/40-libinput.conf /etc/X11/xorg.conf.d
@@ -90,7 +87,6 @@ replace $PWD/config/iwd/main.conf /etc/iwd
 
 # udev
 replace_dir $PWD/config/udev /etc/udev/rules.d
-
 
 #--------
 # Scripts

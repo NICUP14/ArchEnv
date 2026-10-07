@@ -6,26 +6,15 @@ Docs:
 
 * [st](docs/st.md)
 * [dwm](docs/dwm.md)
-* [nvim](docs/nvim.md)
 * [Power Saving guide](docs/powersave.md)
 * [ThinkPad X1C8 Fixes](docs/x1c8.md)
 
 Configs:
 
-* auto-cpufreq
-* bash
-* dunst
 * iwd
 * make
-* nvim
-* sxhkd
-* sysctl
-* tlp
 * udev
-* vim
 * xorg
-* zathura
-* zsh
 
 Packages:
 
